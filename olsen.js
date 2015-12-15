@@ -6,7 +6,7 @@ var aes = require('gibberish-aes/dist/gibberish-aes-1.0.0.js');
 var fs = require('fs');
 var lessMiddleware = require('less-middleware');
 
-server.listen(3005);
+server.listen(process.env.PORT || 3005);
 
 app.use(lessMiddleware(__dirname + '/public'));
 app.use(express.static(__dirname + '/public'));
@@ -82,7 +82,7 @@ io.on('connection', function (socket) {
 	socket.on('data', function (data) {
 		var key = aes.dec(data.key, socket.key);
 		var content = JSON.parse(aes.dec(data.content, key));
-		
+
 		/*if (content.type == 'app') {
 			socket.sendApp(content.name);
 		}*/
