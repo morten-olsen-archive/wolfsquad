@@ -48,21 +48,6 @@
 				boot.load('utils/voice', function (voice) {
 					voice.say(content.say);
 				});
-				/*var msg = new SpeechSynthesisUtterance();
-				var voices = window.speechSynthesis.getVoices();
-				msg.voice = voices[2]; // Note: some voices don't support altering params
-				msg.voiceURI = 'native';
-				msg.volume = 1; // 0 to 1
-				msg.rate = 1; // 0.1 to 10
-				msg.pitch = 2; //0 to 2
-				msg.text = content.say;
-				msg.lang = 'en-UK';
-
-				msg.onend = function(e) {
-				  console.log('Finished in ' + event.elapsedTime + ' seconds.');
-				};
-
-				speechSynthesis.speak(msg);*/
 			}
 			if (content.type === 'loadmodules') {
 
@@ -116,7 +101,29 @@
 		        });
 
 
+				me.fetch = function(method, url, data) {
+					return new Promise(function (resolve, failed) {
+						var xhr = new XMLHttpRequest();
+						xhr.onload = function () {
+								var content = GibberishAES.dec(xhr.responseText, pass);
+								resolve(JSON.parse(content));
+						};
+						xhr.open(method, url, true);
+						xhr.setRequestHeader('user-id', id);
 
+						if (data) {
+							var key = guid();
+							var secureKey = GibberishAES.enc(key, pass);
+							var encrypted = GibberishAES.enc(JSON.stringify(data), key);
+							xhr.setRequestHeader('key', secureKey);
+							xhr.send({
+								data: encrypted
+							});
+						} else {
+							xhr.send();
+						}
+					});
+				}
 
 		    /**
 		     * Actually invoke a waiting call with the dependancies

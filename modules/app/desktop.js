@@ -51,6 +51,10 @@ boot.def('app/desktop', ['core', 'ui/icon', 'ui/bgmap'], function (exports, core
 		core.open('composemail');
 	});
 
+	addIcon('10-Email/plane-paper-1.svg', 'Blog', function () {
+		core.open('blog/main');
+	});
+
 	addIcon('18-Folders/folder-bookmark.svg', 'Browser Test', function () {
 		core.open('browser', {
 			src: 'https://www.dr.dk'

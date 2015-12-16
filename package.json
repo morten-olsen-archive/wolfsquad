@@ -4,14 +4,19 @@
   "description": "",
   "main": "olsen.js",
   "dependencies": {
-    "gibberish-aes": "^1.0.0",
+    "body-parser": "^1.14.1",
+    "concat-stream": "^1.5.1",
     "express": "^4.10.6",
+    "faker": "^3.0.1",
+    "gibberish-aes": "^1.0.0",
     "less-middleware": "^1.0.4",
+    "parse": "^1.6.9",
     "socket.io": "^1.2.1"
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "monitor": "nodemon olsen.js",
     "start": "node olsen.js"
   },
   "author": "",
