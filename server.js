@@ -4,22 +4,20 @@ var server = require('http').Server(app);
 var aes = require('gibberish-aes/dist/gibberish-aes-1.0.0.js');
 var fs = require('fs');
 var lessMiddleware = require('less-middleware');
-var Parse = require('parse/node');
-Parse.initialize("3ZmEJnVmCsDDqW4CbOquu3ju462o1nTb4Swgtmfw", "KLkPl6kNEr4w4bGAYLLegiHD0ZbUz21FSIPGjgoh");
-var users = require('./server/users');
+var users = require('./server/data/users');
+var db = require('./server/data/db');
 
-server.listen(process.env.PORT || 3005);
-
-users.load.then(function (u) {
+db.init.then(function () {
+	app.use('/login', require('./server/login'));
 	app.use(lessMiddleware(__dirname + '/public'));
 	app.use(express.static(__dirname + '/public'));
 	app.use('/modules', require(__dirname + '/server/modulehandler.js'));
-	app.use('/login', require('./server/login'));
 	app.use('/api', require('./server/api'));
 	app.get('/gibberish', function (req, res) {
 		res.sendFile(__dirname + '/node_modules/gibberish-aes/dist/gibberish-aes-1.0.0.js');
 	});
 	require('./server/socket')(server);
+	server.listen(process.env.PORT || 3005);
 }).catch(function (err) {
-	console.error(err);
+	process.stderr.write(err.stack);
 });

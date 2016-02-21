@@ -43,10 +43,6 @@ boot.def('app/desktop', ['core', 'ui/icon', 'ui/bgmap'], function (exports, core
 		core.open('profiles/morten');
 	});
 
-	/*addIcon('10-Email/plane-paper-1.svg', 'Compose Secure Mail', function () {
-		core.open('composemail');
-	});*/
-
 	addIcon('10-Email/plane-paper-1.svg', 'Contact Commander', function () {
 		core.open('composemail');
 	});

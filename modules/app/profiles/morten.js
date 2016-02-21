@@ -27,8 +27,8 @@ boot.def('app/profiles/morten', ['ui/bgmap', 'app/location/maps'], function (exp
 				html: core.ml(function () {/**
 					<div style="
 						width:100%;
-						height:100%; 
-						background-image:url(https://lh3.googleusercontent.com/-SzOPQYYLnTk/Uu6llr1ebKI/AAAAAAAAU6M/TBcHFE2qF8A/w640-h642-no/me.jpg);
+						height:100%;
+						background-image:url(https://avatars2.githubusercontent.com/u/970042?v=3&s=460);
 						background-size:cover;
 						background-position: center;" />
 				**/})
