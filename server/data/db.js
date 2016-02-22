@@ -19,8 +19,12 @@ exports.init = Promise.resolve().then(function () {
     table.timestamps();
   });
 }).then(function () {
+  return exports.User.collection().fetchOne();
+
+}).then(function (user) {
+  if (user) return '';
+
   var demoUser = new exports.User({
-    id: 1,
     name: 'admin',
     key: 'password'
   });
