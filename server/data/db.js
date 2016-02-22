@@ -1,10 +1,21 @@
-var knex = require('knex')({
+var connection = {
   client: 'sqlite3',
   connection: {
     filename: "./mydb.sqlite"
   },
   useNullAsDefault: true
-});
+};
+console.log('dfgdfg', process.env.PG_CONNECTION_STRING);
+if (process.env.PG_CONNECTION_STRING) {
+  connection = {
+    client: 'pg',
+    connection: process.env.PG_CONNECTION_STRING,
+    searchPath: 'knex,public',
+    useNullAsDefault: true
+  };
+}
+
+var knex = require('knex')(connection);
 var bookshelf = require('bookshelf')(knex);
 
 exports.User = bookshelf.Model.extend({
@@ -20,7 +31,6 @@ exports.init = Promise.resolve().then(function () {
   });
 }).then(function () {
   return exports.User.collection().fetchOne();
-
 }).then(function (user) {
   if (user) return '';
 
