@@ -5,7 +5,7 @@ var connection = {
   },
   useNullAsDefault: true
 };
-console.log('dfgdfg', process.env.PG_CONNECTION_STRING);
+
 if (process.env.PG_CONNECTION_STRING) {
   connection = {
     client: 'pg',
