@@ -6,33 +6,26 @@ boot.def('ui/bgmap', [], function (exports) {
 	mapBg.style.width = '100%';
 	mapBg.style.height = '100%';
 	mapBg.style.zIndex = '-2';
+	mapBg.id = 'new-map';
 	document.body.appendChild(mapBg);
 
-	var geocoder = new google.maps.Geocoder();
+	mapboxgl.accessToken = 'pk.eyJ1IjoibW9ydGVub2xzZW4iLCJhIjoiY2lpZHBhaTNnMDAweXdlbTBhcTdkcWVnbSJ9.yah6Klt4jMYlkEmpC6PLKQ';
+	var map = new mapboxgl.Map({
+	    container: 'new-map', // container id
+	    style: 'mapbox://styles/mortenolsen/ciidqy8kt002dbrkm9ai9n9ev', //stylesheet location
+	    center: [-74.50, 40], // starting position
+	    zoom: 9 // starting zoom
+	});
 
-	var options = {};
+  mapBg.style.position = 'fixed';
+	mapBg.style.transform = 'none';
 
-    options.styles = [{"featureType":"water","stylers":[{"color":"#021019"}]},{"featureType":"landscape","stylers":[{"color":"#08304b"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#0c4152"},{"lightness":5}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#0b434f"},{"lightness":25}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"road.arterial","elementType":"geometry.stroke","stylers":[{"color":"#0b3d51"},{"lightness":16}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"}]},{"elementType":"labels.text.fill","stylers":[{"color":"#ffffff"}]},{"elementType":"labels.text.stroke","stylers":[{"color":"#000000"},{"lightness":13}]},{"featureType":"transit","stylers":[{"color":"#146474"}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#144b53"},{"lightness":14},{"weight":1.4}]}];
+  navigator.geolocation.getCurrentPosition(function (position) {
+		console.log('located', position.coords.latitude, position.coords.longitude);
+		map.flyTo({center: [position.coords.longitude, position.coords.latitude], zoom: 12, pitch: 92});
+  });
 
-	options.disableDefaultUI = true;
-	options.zoom = options.zoom || 11;
-	options.center = options.center || new google.maps.LatLng(40.6700, -73.9400);
-
-    me.map = new google.maps.Map(mapBg,
-        options);
-
-    mapBg.style.position = 'fixed';
-
-    me.setLocation = function (address) {
-    	/*geocoder.geocode( { 'address': address }, function(results, status) { 
-    		var first = results[0];
-    		me.map.panTo(first.geometry.location);
-    	});*/
-    }
-
-    navigator.geolocation.getCurrentPosition(function (position) {
-    	me.map.panTo(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
-    });
+	me.setLocation = function() {};
 
 	return me;
 });
