@@ -17,7 +17,7 @@ db.init.then(function () {
 		res.sendFile(__dirname + '/node_modules/gibberish-aes/dist/gibberish-aes-1.0.0.js');
 	});
 	require('./server/socket')(server);
-	server.listen(process.env.PORT || 3005);
+	server.listen(process.env.PORT || 3005, '0.0.0.0');
 }).catch(function (err) {
 	process.stderr.write(err.stack);
 });
