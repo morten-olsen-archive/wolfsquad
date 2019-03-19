@@ -1,6 +1,7 @@
 import path from 'path';
 import { Configuration } from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import SriPlugin from 'webpack-subresource-integrity';
 // import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 const production = process.env.NODE_ENV === 'production';
@@ -28,10 +29,15 @@ const config: Configuration = {
   },
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: '[name].[hash:16].js',
+    filename: '[name].[hash:6].js',
+    crossOriginLoading: 'anonymous',
   },
   plugins: [
     new HtmlWebpackPlugin(),
+    new SriPlugin({
+      hashFuncNames: ['sha256', 'sha384'],
+      enabled: process.env.NODE_ENV === 'production',
+    }),
     // new BundleAnalyzerPlugin(),
   ],
   module: {

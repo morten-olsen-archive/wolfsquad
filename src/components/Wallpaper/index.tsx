@@ -30,7 +30,6 @@ const Wallpaper = () => {
     );
   } else {
     import('react-map-gl').then(({ default: ReactMapGL }) => {
-      console.log('sdf', ReactMapGL)
       setReactMapGL({
         ReactMapGL
       });
