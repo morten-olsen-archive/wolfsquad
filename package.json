@@ -10,7 +10,7 @@
     "express": "^4.10.6",
     "faker": "^3.0.1",
     "gibberish-aes": "^1.0.0",
-    "knex": "^0.10.0",
+    "knex": "^0.16.4",
     "less-middleware": "^1.0.4",
     "pg": "^4.4.6",
     "socket.io": "^1.2.1",
