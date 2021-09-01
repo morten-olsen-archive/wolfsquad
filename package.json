@@ -14,7 +14,7 @@
     "less-middleware": "^1.0.4",
     "pg": "^4.4.6",
     "socket.io": "^1.2.1",
-    "sqlite3": "^3.1.1"
+    "sqlite3": "^4.0.0"
   },
   "devDependencies": {
     "foreman": "^1.4.1",
