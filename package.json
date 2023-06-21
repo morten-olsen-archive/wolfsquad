@@ -12,7 +12,7 @@
     "gibberish-aes": "^1.0.0",
     "knex": "^0.10.0",
     "less-middleware": "^1.0.4",
-    "pg": "^4.4.6",
+    "pg": "^8.4.0",
     "socket.io": "^1.2.1",
     "sqlite3": "^3.1.1"
   },
